@@ -1,6 +1,10 @@
 files = open("day1_input.txt", "r")
 
 function load_file(files)
+    # Once the file is read, the pointer is placed at the end.
+    # If you call it in multiple function it return nothing
+    # So we need to call it in the main function
+    seekstart(files) # Reset the file pointer to the beginning
     left_list = []
     right_list = []
 
@@ -38,17 +42,19 @@ function part_2(files)
     similarity = []
     for ele in left
         count_element = count(x -> x == ele, right)
-        s =  count_element*ele
-        if s > 0
+        s =  count_element* ele
+        if s != 0
             push!(similarity,s)
         end
+        
     end
 
     return sum(similarity)
 end
 
-
+println("********* Part1 **********")
 println(part_1(files))
+println("********* Part2 **********")
 println(part_2(files))
 
 
