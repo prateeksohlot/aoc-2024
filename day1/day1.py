@@ -1,18 +1,17 @@
-def load_input(files):
-    left_list = []
-    right_list = []
+def load_input(path:str)->list:
 
-    for line in files:
-        line = line.split()
-        left_list.append(line[0])
-        right_list.append(line[1])
+    files = open(path, 'r+')
+
+    left_list = [line.strip().split()[0] for line in files]
+    right_list = [line.strip().split()[1] for line in files]
+    
     
     return left_list, right_list
 
 
-def part_1(files):
+def part_1(path:str)->int:
     
-    left_list, right_list = load_input(files)
+    left_list, right_list = load_input(path)
 
     left_list.sort()
     right_list.sort()
@@ -25,36 +24,23 @@ def part_1(files):
 
     return sum(location_diff)
 
-# def part_2(files):
-#     left_list, right_list = load_input(files)
+def part_2(path:str)->int:
+    left_list, right_list = load_input(path)
 
-#     total = 0
-#     for ele in left_list:
-#         count = right_list.count(ele)
-#         total += (int(count) * int(ele))
+    total = 0
+    for ele in left_list:
+        count = right_list.count(ele)
+        total += count * int(ele)
     
-#     return total
-files = open('day1_input.txt', 'r+')
-left_list, right_list = load_input(files)
+    return total
 
-total = 0
+#Doc Test
+if __name__ == "__main__":
 
-for ele in left_list:
-    count = right_list.count(ele)
-    # print(type(count))
-    total += count*int(ele)
-    print(count*int(ele))
-    # print(f'{ele} appears {count} times')
-print(total)
-# #Doc Test
-# if __name__ == "__main__":
-#     #Reading Input txt file
-#     files = open('day1_input.txt', 'r+')
+    print("***** Part 1 *****")
+    print(part_1('day1_input.txt'))
+    print("*"*18)
 
-#     print("***** Part 1 *****")
-#     print(part_1(files))
-#     print("*"*18)
-
-#     print("***** Part 2 *****")
-#     print(part_2(files))
-#     print("*"*18)
+    print("***** Part 2 *****")
+    print(part_2('day1_input.txt'))
+    print("*"*18)
